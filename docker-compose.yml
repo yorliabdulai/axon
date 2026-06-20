@@ -1,0 +1,64 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: axon
+      POSTGRES_PASSWORD: axon
+      POSTGRES_DB: axon
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./packages/core/migrations/001_init.sql:/docker-entrypoint-initdb.d/001_init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U axon -d axon"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  axon-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: api
+    ports:
+      - "3000:3000"
+    environment:
+      MOCK_MODE: "true"
+      DATABASE_URL: postgresql://axon:axon@postgres:5432/axon
+      REDIS_URL: redis://redis:6379
+      PORT: 3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - uploads:/app/uploads
+
+  axon-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dashboard
+    ports:
+      - "3001:3001"
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3000
+      DASHBOARD_API_KEY: dev-dashboard-key
+    depends_on:
+      - axon-api
+
+volumes:
+  postgres_data:
+  uploads:

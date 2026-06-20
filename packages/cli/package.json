@@ -1,0 +1,17 @@
+{
+  "name": "create-axon-agent",
+  "version": "1.0.0",
+  "description": "Scaffold a new Axon support agent project",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "create-axon-agent": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

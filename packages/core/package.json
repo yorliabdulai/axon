@@ -1,0 +1,48 @@
+{
+  "name": "@axon-ai/core",
+  "version": "1.0.0",
+  "description": "Core Axon agent engine — RAG, LLM, escalation, API",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "axon-server": "./dist/server/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "dev": "tsx watch src/server/index.ts",
+    "start": "node dist/server/index.js",
+    "test": "node --import tsx --test src/**/*.test.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@axon-ai/adapters": "workspace:*",
+    "@fastify/cors": "^10.0.1",
+    "@fastify/multipart": "^9.0.1",
+    "@fastify/static": "^8.0.3",
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.7",
+    "fastify": "^5.2.0",
+    "mammoth": "^1.8.0",
+    "pdf-parse": "^1.1.1",
+    "pg": "^8.13.1",
+    "pgvector": "^0.2.0",
+    "uuid": "^11.0.3",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/pdf-parse": "^1.1.4",
+    "@types/pg": "^8.11.10",
+    "@types/uuid": "^10.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

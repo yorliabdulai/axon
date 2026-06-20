@@ -1,0 +1,16 @@
+{
+  "name": "@axon-ai/widget",
+  "version": "1.0.0",
+  "description": "Embeddable Axon web chat widget",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3"
+  }
+}

@@ -1,0 +1,11 @@
+export { AxonAgent } from './agent/AxonAgent.js';
+export type { AgentResponse, HandleMessageOptions } from './agent/AxonAgent.js';
+export { EscalationEngine, isWithinBusinessHours } from './agent/escalation.js';
+export type { EscalationContext, EscalationReason, EscalationResult } from './agent/escalation.js';
+export { LLMService, RAGService, retrieveAndGenerate } from './agent/rag.js';
+export { AxonConfigSchema, validateConfig } from './config/schema.js';
+export type { AxonConfig, LanguageCode } from './config/schema.js';
+export { chunkText, parseDocument, getParser } from './knowledge/ingestion.js';
+export { Database, EmbeddingService, VectorStore } from './knowledge/vector.js';
+export type { RetrievedChunk } from './knowledge/vector.js';
+export { LanguageMiddleware } from './middleware/language.js';
